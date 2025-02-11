@@ -3,6 +3,7 @@ import sys
 
 json_data = {}
 out_filename = str()
+url = str()
 
 
 def parse_json_file(filename):
@@ -10,6 +11,16 @@ def parse_json_file(filename):
     global json_data
     json_data = json.load(f)
     f.close()
+    
+def get_url(filename):
+    f = open(filename, "r")
+    fl = f.readlines()
+    f.close()
+    
+    for l in fl:
+        if "@base <" in l:
+            global url
+            url = l.split("<")[1].split(">")[0]
     
 def create_output_file(filename):
     f = open(filename, "r")
@@ -50,7 +61,7 @@ def write_person_exam():
     f = open(out_filename, "a")
     
     for exam in json_data:
-        f.write(f"""###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/{exam["nome"]["primeiro"]}_{exam["nome"]["último"]}
+        f.write(f"""###  {url}{exam["nome"]["primeiro"]}_{exam["nome"]["último"]}
 :{exam["nome"]["primeiro"]}_{exam["nome"]["último"]} rdf:type owl:NamedIndividual ,
                         :Pessoa ;
                :temModalidade :{exam["modalidade"]} ;
@@ -64,7 +75,7 @@ def write_person_exam():
                :ultimoNome "{exam["nome"]["último"]}" .
 
 
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Exame_{exam["_id"]}
+###  {url}Exame_{exam["_id"]}
 :Exame_{exam["_id"]} rdf:type owl:NamedIndividual ,
                                          :Exame ;
                                 :realizadoPor :{exam["nome"]["primeiro"]}_{exam["nome"]["último"]} ;
@@ -92,6 +103,7 @@ if __name__ == "__main__":
     if sys.argv.__len__() == 3:
         parse_json_file(sys.argv[1])
         create_output_file(sys.argv[2])
+        get_url(sys.argv[2])
         write_modalidades()
         write_person_exam()
     else:

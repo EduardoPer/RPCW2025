@@ -120,58 +120,10 @@
 #    Individuals
 #################################################################
 
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Basquetebol
-:Basquetebol rdf:type owl:NamedIndividual ,
-                  :Modalidade ;
-         :nomeModalidade "Basquetebol" .
-         
-         
 ###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Dança
 :Dança rdf:type owl:NamedIndividual ,
                   :Modalidade ;
          :nomeModalidade "Dança" .
-         
-         
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Badminton
-:Badminton rdf:type owl:NamedIndividual ,
-                  :Modalidade ;
-         :nomeModalidade "Badminton" .
-         
-         
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/BTT
-:BTT rdf:type owl:NamedIndividual ,
-                  :Modalidade ;
-         :nomeModalidade "BTT" .
-         
-         
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Esgrima
-:Esgrima rdf:type owl:NamedIndividual ,
-                  :Modalidade ;
-         :nomeModalidade "Esgrima" .
-         
-         
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Equitação
-:Equitação rdf:type owl:NamedIndividual ,
-                  :Modalidade ;
-         :nomeModalidade "Equitação" .
-         
-         
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Ciclismo
-:Ciclismo rdf:type owl:NamedIndividual ,
-                  :Modalidade ;
-         :nomeModalidade "Ciclismo" .
-         
-         
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Triatlo
-:Triatlo rdf:type owl:NamedIndividual ,
-                  :Modalidade ;
-         :nomeModalidade "Triatlo" .
-         
-         
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Orientação
-:Orientação rdf:type owl:NamedIndividual ,
-                  :Modalidade ;
-         :nomeModalidade "Orientação" .
          
          
 ###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Parapente
@@ -180,34 +132,52 @@
          :nomeModalidade "Parapente" .
          
          
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Badminton
+:Badminton rdf:type owl:NamedIndividual ,
+                  :Modalidade ;
+         :nomeModalidade "Badminton" .
+         
+         
 ###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/SUP
 :SUP rdf:type owl:NamedIndividual ,
                   :Modalidade ;
          :nomeModalidade "SUP" .
          
          
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Ténis
-:Ténis rdf:type owl:NamedIndividual ,
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/BTT
+:BTT rdf:type owl:NamedIndividual ,
                   :Modalidade ;
-         :nomeModalidade "Ténis" .
+         :nomeModalidade "BTT" .
          
          
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Futebol
-:Futebol rdf:type owl:NamedIndividual ,
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Equitação
+:Equitação rdf:type owl:NamedIndividual ,
                   :Modalidade ;
-         :nomeModalidade "Futebol" .
+         :nomeModalidade "Equitação" .
          
          
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Atletismo
-:Atletismo rdf:type owl:NamedIndividual ,
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Orientação
+:Orientação rdf:type owl:NamedIndividual ,
                   :Modalidade ;
-         :nomeModalidade "Atletismo" .
+         :nomeModalidade "Orientação" .
          
          
-###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Andebol
-:Andebol rdf:type owl:NamedIndividual ,
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Esgrima
+:Esgrima rdf:type owl:NamedIndividual ,
                   :Modalidade ;
-         :nomeModalidade "Andebol" .
+         :nomeModalidade "Esgrima" .
+         
+         
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Basquetebol
+:Basquetebol rdf:type owl:NamedIndividual ,
+                  :Modalidade ;
+         :nomeModalidade "Basquetebol" .
+         
+         
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Ciclismo
+:Ciclismo rdf:type owl:NamedIndividual ,
+                  :Modalidade ;
+         :nomeModalidade "Ciclismo" .
          
          
 ###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Karaté
@@ -220,6 +190,36 @@
 :Patinagem rdf:type owl:NamedIndividual ,
                   :Modalidade ;
          :nomeModalidade "Patinagem" .
+         
+         
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Andebol
+:Andebol rdf:type owl:NamedIndividual ,
+                  :Modalidade ;
+         :nomeModalidade "Andebol" .
+         
+         
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Atletismo
+:Atletismo rdf:type owl:NamedIndividual ,
+                  :Modalidade ;
+         :nomeModalidade "Atletismo" .
+         
+         
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Ténis
+:Ténis rdf:type owl:NamedIndividual ,
+                  :Modalidade ;
+         :nomeModalidade "Ténis" .
+         
+         
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Triatlo
+:Triatlo rdf:type owl:NamedIndividual ,
+                  :Modalidade ;
+         :nomeModalidade "Triatlo" .
+         
+         
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Futebol
+:Futebol rdf:type owl:NamedIndividual ,
+                  :Modalidade ;
+         :nomeModalidade "Futebol" .
          
          
 ###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Emily_Terrell
