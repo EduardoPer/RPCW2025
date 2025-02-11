@@ -1,0 +1,152 @@
+@prefix : <http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/> .
+
+<http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/realizadoPor
+:realizadoPor rdf:type owl:ObjectProperty ;
+              rdfs:domain :Exame ;
+              rdfs:range :Pessoa .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/temModalidade
+:temModalidade rdf:type owl:ObjectProperty ;
+               rdfs:domain :Pessoa ;
+               rdfs:range :Modalidade .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/clube
+:clube rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Pessoa ;
+       rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/dataEMD
+:dataEMD rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Exame ;
+         rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/email
+:email rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Pessoa ;
+       rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/federado
+:federado rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Pessoa ;
+          rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/genero
+:genero rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Pessoa ;
+        rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/id
+:id rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Exame ;
+    rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/idade
+:idade rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Pessoa ;
+       rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/morada
+:morada rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Pessoa ;
+        rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/nomeModalidade
+:nomeModalidade rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Modalidade ;
+                rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/primeiroNome
+:primeiroNome rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Pessoa ;
+              rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/resultado
+:resultado rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Exame ;
+           rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/ultimoNome
+:ultimoNome rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Pessoa ;
+            rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Exame
+:Exame rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Modalidade
+:Modalidade rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Pessoa
+:Pessoa rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Emily_Terrell
+:Emily_Terrell rdf:type owl:NamedIndividual ,
+                        :Pessoa ;
+               :temModalidade :Futebol ;
+               :clube "GDGoma" ;
+               :email "emily.terrell@gdgoma.org" ;
+               :federado "false"^^xsd:boolean ;
+               :genero "F" ;
+               :idade 28 ;
+               :morada "Clay" ;
+               :primeiroNome "Emily" ;
+               :ultimoNome "Terrell" .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Exame_60b3ee0ee00725274024d5a2
+:Exame_60b3ee0ee00725274024d5a2 rdf:type owl:NamedIndividual ,
+                                         :Exame ;
+                                :realizadoPor :Emily_Terrell ;
+                                :dataEMD "2020-07-27" ;
+                                :id "60b3ee0ee00725274024d5a2" ;
+                                :resultado "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/eduardo/ontologies/2025/1/athletes/Futebol
+:Futebol rdf:type owl:NamedIndividual ,
+                  :Modalidade ;
+         :nomeModalidade "Futebol" .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
