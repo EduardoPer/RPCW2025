@@ -126,7 +126,7 @@ def quiz():
         
     correct = (correct_answer == user_answer)
     session['score'] = session.get('score', 0) + (1 if correct else 0)
-    return render_template('result.html', correct=correct, question=request.form.get() , correct_answer=correct_answer, user_answer=user_answer, score=session['score'])
+    return render_template('result.html', correct=correct, question=request.form.get('question') , correct_answer=correct_answer, user_answer=user_answer, score=session['score'])
 
 @app.route('/score')
 def score():
