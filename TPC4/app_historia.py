@@ -50,62 +50,102 @@ def reset_dicts():
     quiz_contents.clear()
     already_done.clear()
 
-def query_0_content(): #Cognomes
-    sparql_query = """
-    PREFIX : <http://www.semanticweb.org/andre/ontologies/2015/6/historia#>
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    SELECT DISTINCT ?nomeRei ?cognomesRei WHERE{
-        ?s a :Rei ;
-        :nome ?nomeRei ;
-        :cognomes ?cognomesRei .
-    }
-    """
-    q_results = query_graphdb(endpoint, sparql_query)
-    
-    lista_content = list()
-    for r in q_results['results']['bindings']:
-        temp = (r['nomeRei']['value'].split('#')[-1], r['cognomesRei']['value'].split('#')[-1].split(','))
-        lista_content.append(temp)
-    quiz_contents['cognomes'] = lista_content
-    
 def query_0_pick_question():
     if not quiz_contents.get('cognomes'):
-        query_0_content()
+        sparql_query = """
+        PREFIX : <http://www.semanticweb.org/andre/ontologies/2015/6/historia#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+        SELECT ?nomeRei ?cognomesRei WHERE {
+        	?s a ?o .
+            FILTER(?o = :Rei || ?o = :Rainha)
+            ?s :nome ?nomeRei ;
+               :cognomes ?cognomesRei .
+        }
+        """
+        q_results = query_graphdb(endpoint, sparql_query)
+
+        lista_content = list()
+        for r in q_results['results']['bindings']:
+            temp = (r['nomeRei']['value'].split('#')[-1], r['cognomesRei']['value'].split('#')[-1].split(','))
+            lista_content.append(temp)
+        quiz_contents['cognomes'] = lista_content
+    
     cognomes_all = quiz_contents['cognomes']
-    question = dict()
+    question = {}
+    random_rei_index = int()
+    random_cognome_index = int()
+    
     picked = False
     while not picked:
         random_rei_index = random.randrange(0, len(cognomes_all))
         random_cognome_index = random.randrange(0, len(cognomes_all[random_rei_index][1]))
         if (already_done.get('cognomes') is None):
             already_done['cognomes'] = [(random_rei_index, random_cognome_index)]
-            question['question'] = f"Qual dos seguintes cognomes pertence ao Rei {cognomes_all[random_rei_index][0]}?"
-            question['answer'] = cognomes_all[random_rei_index][1][random_cognome_index]
-            question['options'] = [question['answer']]
-            i = 3
-            while i > 0:
-                r_temp = random.randrange(0, len(cognomes_all))
-                c_temp = random.randrange(0, len(cognomes_all[r_temp][1]))
-                if (r_temp != random_rei_index) and (cognomes_all[r_temp][1][c_temp] not in question['options']):
-                    question['options'].append(cognomes_all[r_temp][1][c_temp])
-                    i-=1
-            random.shuffle(question['options'])
             picked = True
         elif ((random_rei_index, random_cognome_index) not in already_done['cognomes']):
             already_done['cognomes'].append((random_rei_index, random_cognome_index))
-            question['question'] = f"Qual dos seguintes cognomes pertence ao Rei {cognomes_all[random_rei_index][0]}?"
-            question['answer'] = cognomes_all[random_rei_index][1][random_cognome_index]
-            question['options'] = [question['answer']]
-            i = 3
-            while i > 0:
-                r_temp = random.randrange(0, len(cognomes_all))
-                c_temp = random.randrange(0, len(cognomes_all[r_temp][1]))
-                if (r_temp != random_rei_index) and (cognomes_all[r_temp][1][c_temp] not in question['options']):
-                    question['options'].append(cognomes_all[r_temp][1][c_temp])
-                    i-=1
-            random.shuffle(question['options'])
             picked = True
+
+    question['answer'] = cognomes_all[random_rei_index][1][random_cognome_index]
+    question['question'] = f"Qual dos seguintes cognomes pertence {"à Rainha" if "A" in question['answer'].split(" ") else "ao Rei"} {cognomes_all[random_rei_index][0]}?"
+    question['options'] = [question['answer']]
+    i = 3
+    while i > 0:
+        r_temp = random.randrange(0, len(cognomes_all))
+        c_temp = random.randrange(0, len(cognomes_all[r_temp][1]))
+        if (r_temp != random_rei_index) and (cognomes_all[r_temp][1][c_temp] not in question['options']) and (cognomes_all[r_temp][1][c_temp] not in cognomes_all[random_rei_index][1]):
+            question['options'].append(cognomes_all[r_temp][1][c_temp])
+            i-=1
+    random.shuffle(question['options'])
     return question
+
+def query_1_pick_question():
+    if not quiz_contents.get('casas'):
+        sparql_query = """
+        PREFIX : <http://www.semanticweb.org/andre/ontologies/2015/6/historia#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+        SELECT ?nomeCasa ?nomeRei WHERE {
+        	?s a :Casa ;
+               :nome ?nomeCasa ;
+               :temElemento/:nome ?nomeRei .
+        }
+        """
+        q_results = query_graphdb(endpoint, sparql_query)
+        lista_content = list()
+        for r in q_results['results']['bindings']:
+            temp = (r['nomeCasa']['value'].split('#')[-1], r['nomeRei']['value'].split('#')[-1])
+            lista_content.append(temp)
+        quiz_contents['casas'] = lista_content
+    
+    casas_all = quiz_contents['casas']
+    casas, monarcas = [], []
+    for c in casas_all:
+        casas.append(c[0])
+        monarcas.append(c[1])
+    
+    question = {}
+    picked = False
+    random_final_tuple = tuple()
+    while not picked:
+        random_tuple = (random.choice(casas), random.choice(monarcas))
+        random_true_tuple = random.choice(casas_all)
+        random_final_tuple = random.choice([random_tuple, random_true_tuple])
+        
+        if (already_done.get('casas') is None):
+            already_done['casas'] = [random_final_tuple]
+            picked = True
+        elif random_final_tuple not in already_done['casas']:
+            already_done['casas'].append(random_final_tuple)
+            picked = True
+    
+    question['question'] = f"@ monarca {random_final_tuple[1]} viveu na casa {random_final_tuple[0]}?"
+    question['answer'] = "True" if random_final_tuple in casas_all else "False"
+    question['options'] = ["True", "False"]
+    
+    return question
+        
 #################################################################    
     
 
@@ -117,7 +157,7 @@ def home():
 
 @app.route('/quiz', methods=['GET'])
 def generate_question():
-    return render_template('quiz.html', question=query_0_pick_question())
+    return render_template('quiz.html', question=random.choice([query_0_pick_question(), query_1_pick_question()]))
 
 @app.route('/quiz', methods=['POST'])
 def quiz():
