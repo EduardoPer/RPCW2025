@@ -342,7 +342,59 @@ def query_4_pick_question():
     
     return question
 
-available_questions = [query_0_pick_question, query_1_pick_question, query_2_pick_question, query_3_pick_question, query_4_pick_question]
+def query_5_pick_question():
+    if not quiz_contents.get('reiDisnastia'):
+        sparql_query = """
+        PREFIX : <http://www.semanticweb.org/andre/ontologies/2015/6/historia#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+        select DISTINCT ?nomeRei ?dinastia where {
+            ?s a ?o .
+            FILTER(?o = :Rei || ?o = :Rainha)
+            ?s :nome ?nomeRei ;
+               :temReinado/:dinastia/:nome ?dinastia .
+        }
+        """
+        q_results = query_graphdb(endpoint, sparql_query)
+        lista_content = list()
+        for r in q_results['results']['bindings']:
+            temp = (r['nomeRei']['value'].split('#')[-1], r['dinastia']['value'].split('#')[-1])
+            lista_content.append(temp)
+        quiz_contents['reiDisnastia'] = lista_content
+    print(len(quiz_contents['reiDisnastia']))
+    dinastiasSet = set()
+    for _, d in quiz_contents['reiDisnastia']:
+        dinastiasSet.add(d)
+    
+    random_reis = []
+    correct_answers = []
+    now = datetime.now().timestamp()
+    i = 4
+    while i > 0:
+        random_rei_din = random.choice(quiz_contents['reiDisnastia'])
+        if (already_done.get('reiDisnastia') is None):
+            already_done['reiDisnastia'] = [random_rei_din]
+            random_reis.append(random_rei_din[0])
+            correct_answers.append(random_rei_din)
+            i-=1
+        elif (random_rei_din not in already_done['reiDisnastia']):
+            already_done['reiDisnastia'].append(random_rei_din)
+            random_reis.append(random_rei_din[0])
+            correct_answers.append(random_rei_din)
+            i-=1
+        elif (datetime.now().timestamp() - now > 5.0):
+            return "Full"
+    
+    question = {}
+    question['question'] = f"Corresponda cada rei à dinastia na qual governou"
+    question['left_items'] = random_reis
+    question['right_items'] = dinastiasSet
+    question['correct_matches'] = correct_answers
+    
+    return question
+    
+
+available_questions = [query_0_pick_question, query_1_pick_question, query_2_pick_question, query_3_pick_question, query_4_pick_question, query_5_pick_question]
 #################################################################
 @app.route('/')
 def home():
@@ -362,16 +414,25 @@ def generate_question():
         question = question_type()
     
     if question != "Full":
-        return render_template('quiz.html', question=question)
+        if question_type == query_5_pick_question:
+            return render_template('quiz_match.html', question=question)
+        else:
+            return render_template('quiz.html', question=question)
     else:
         return render_template('score.html', score=session.get('score', 0))
 
 @app.route('/quiz', methods=['POST'])
 def quiz():
-    user_answer = request.form.get('answer')
-    correct_answer = request.form.get('correct_answer')
-        
-    correct = (correct_answer == user_answer)
+    print(request.form)
+    if request.form.get('match') == "True":
+        user_answer = [request.form.get('match_1'), request.form.get('match_2'), request.form.get('match_3'), request.form.get('match_4')]
+        correct_answer = [request.form.get('correct_match_1'), request.form.get('correct_match_2'), request.form.get('correct_match_3'), request.form.get('correct_match_4')]
+        correct = (correct_answer == user_answer)
+    else:
+        user_answer = request.form.get('answer')
+        correct_answer = request.form.get('correct_answer')
+        correct = (correct_answer == user_answer)
+    
     session['score'] = session.get('score', 0) + (1 if correct else 0)
     return render_template('result.html', question=request.form.get('question') , correct_answer=correct_answer, user_answer=user_answer, score=session['score'])
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Culture Compass Quiz - Matching</title>
+</head>
+<body>
+    <h1>Culture Compass Quiz</h1>
+    <p>Score: {{ session.get('score', 0) }}</p>
+    <form method="POST" action="/quiz">
+        <p><strong>{{ question.question }}</strong></p>
+        <table>
+            {% for left_item in question.left_items %}
+                <tr>
+                    <td>{{ left_item }}</td>
+                    <td>
+                        <select name="match_{{ loop.index }}" required>
+                            <option value="" disabled selected>Select a match</option>
+                            {% for right_item in question.right_items %}
+                                <option value="{{ left_item }} ; {{ right_item }}">{{ right_item }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% for correct_match in question.correct_matches %}
+            <input type="hidden" name="correct_match_{{ loop.index }}" value="{{ correct_match[0] }} ; {{ correct_match[1] }}">
+        {% endfor %}
+        <input type="hidden" name="match" value="True">
+        <input type="hidden" name="question" value="{{ question.question }}">
+        <button type="submit">Submit Answer</button>
+    </form>
+</body>
+</html>
