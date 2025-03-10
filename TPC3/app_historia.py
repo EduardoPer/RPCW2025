@@ -361,7 +361,7 @@ def query_5_pick_question():
             temp = (r['nomeRei']['value'].split('#')[-1], r['dinastia']['value'].split('#')[-1])
             lista_content.append(temp)
         quiz_contents['reiDisnastia'] = lista_content
-    print(len(quiz_contents['reiDisnastia']))
+    
     dinastiasSet = set()
     for _, d in quiz_contents['reiDisnastia']:
         dinastiasSet.add(d)
@@ -423,7 +423,6 @@ def generate_question():
 
 @app.route('/quiz', methods=['POST'])
 def quiz():
-    print(request.form)
     if request.form.get('match') == "True":
         user_answer = [request.form.get('match_1'), request.form.get('match_2'), request.form.get('match_3'), request.form.get('match_4')]
         correct_answer = [request.form.get('correct_match_1'), request.form.get('correct_match_2'), request.form.get('correct_match_3'), request.form.get('correct_match_4')]
