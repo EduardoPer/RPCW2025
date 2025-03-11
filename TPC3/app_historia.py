@@ -407,11 +407,11 @@ def generate_question():
     question_type = random.choice(available_questions)
     question = question_type()
     now = datetime.now().timestamp()
-    while (question == "Full") and (datetime.now().timestamp() - now <= 5):
+    while (question == "Full") and (available_questions != []) and (datetime.now().timestamp() - now <= 5):
         print(f"Removed {str(question_type)} from the question type pool")
-        available_questions.remove(question_type)
         question_type = random.choice(available_questions)
         question = question_type()
+        available_questions.remove(question_type)
     
     if question != "Full":
         if question_type == query_5_pick_question:
@@ -419,7 +419,7 @@ def generate_question():
         else:
             return render_template('quiz.html', question=question)
     else:
-        return render_template('score.html', score=session.get('score', 0))
+        return render_template('score.html', score=session.get('score', 0), noMoreQuestions=True)
 
 @app.route('/quiz', methods=['POST'])
 def quiz():
@@ -433,7 +433,7 @@ def quiz():
         correct = (correct_answer == user_answer)
     
     session['score'] = session.get('score', 0) + (1 if correct else 0)
-    return render_template('result.html', question=request.form.get('question') , correct_answer=correct_answer, user_answer=user_answer, score=session['score'])
+    return render_template('result.html', question=request.form.get('question') , correct_answer=correct_answer, user_answer=user_answer, isCorrect="Correct!" if correct else "Wrong!", score=session['score'])
 
 @app.route('/score')
 def score():
