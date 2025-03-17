@@ -16,6 +16,8 @@
             </label><br>
         {% endfor %}
         <input type="hidden" name="correct_answer" value="{{ question.answer }}">
+        <input type="hidden" name="question" value="{{ question.question }}">
+        <input type="hidden" name="match" value="False">
         <button type="submit">Submit Answer</button>
     </form>
 </body>

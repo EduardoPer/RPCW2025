@@ -7,6 +7,7 @@
 <body>
     <h1>{{ 'Correct!' if correct else 'Wrong Answer!' }}</h1>
     <p>Question: <strong>{{ question }}</strong></p>
+    <p>Result: <strong>{{ isCorrect }}</strong></p>
     <p>The correct answer was: <strong>{{ correct_answer }}</strong></p>
     <p>Your answer was: <strong>{{ user_answer }}</strong></p>
     <p>Your current score: {{ score }}</p>

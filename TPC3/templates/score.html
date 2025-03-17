@@ -5,7 +5,11 @@
     <title>Final Score</title>
 </head>
 <body>
-    <h1>Quiz Completed!</h1>
+    {% if noMoreQuestions %}
+        <h1>The Quiz has ended due to there being no more available questions to present!</h1>
+    {% else %}
+        <h1>Quiz Completed!</h1>
+    {% endif %}
     <p>Your final score is: <strong>{{ score }}</strong></p>
     <a href="/">Restart Quiz</a>
 </body>
