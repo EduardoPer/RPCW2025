@@ -502,5 +502,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1 and len(sys.argv) < 3:
         nMovies = int(sys.argv[1])
         writeOntologyInTTL("imdb_cinema_info.ttl", "movies.csv", "actors.csv", "principals.csv", fileBase, lastLine, ttl_url, nMovies)
+    elif len(sys.argv):
+        writeOntologyInTTL("imdb_cinema_info.ttl", "movies.csv", "actors.csv", "principals.csv", fileBase, lastLine, ttl_url, 99999999999)
     else:
         print("Command: python3 tpc5_ontology.py [optional: nMovies]")
