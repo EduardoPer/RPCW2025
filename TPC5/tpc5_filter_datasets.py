@@ -12,9 +12,10 @@ def load_filter_TSVs(file_tBasics, file_tAkas, file_tPrincipals, file_nBasics):
     temp_filename = "." + str(datetime.now().timestamp()) + ".csv"
     files_to_rm.append(temp_filename) # 0movies
     movies_set_1 = set()
-    for chunk in pandas.read_csv(file_tBasics, sep="\t", usecols=["tconst", "titleType", "primaryTitle", "originalTitle", "startYear", "runtimeMinutes", "genres"], dtype={"tconst": "str", "titleType": "str", "primaryTitle": "str", "originalTitle": "str", "startYear": "str", "runtimeMinutes": "str", "genres": "str"}, na_values="\\N", chunksize=100000):
+    for chunk in pandas.read_csv(file_tBasics, sep="\t", usecols=["tconst", "titleType", "primaryTitle", "startYear", "runtimeMinutes", "genres"], dtype={"tconst": "str", "titleType": "str", "primaryTitle": "str", "startYear": "str", "runtimeMinutes": "str", "genres": "str"}, na_values="\\N", chunksize=100000):
         chunk_filtered = chunk[chunk["titleType"] == "movie"]
-        chunk_filtered = chunk_filtered.drop_duplicates(subset=["tconst", "primaryTitle", "originalTitle"], keep="first")
+        chunk_filtered = chunk_filtered.drop_duplicates(subset=["tconst", "primaryTitle"], keep="first")
+        chunk_filtered = chunk_filtered.drop_duplicates(subset=["primaryTitle"], keep="first")
         chunk_filtered = chunk_filtered.dropna()
         movies_set_1.update(chunk_filtered["tconst"])
         chunk_filtered.to_csv(temp_filename, mode='a', index=False, header=not os.path.exists(temp_filename))
@@ -37,6 +38,7 @@ def load_filter_TSVs(file_tBasics, file_tAkas, file_tPrincipals, file_nBasics):
     for chunk in pandas.read_csv(file_tPrincipals, sep="\t", usecols=["tconst", "nconst", "characters"], dtype={"tconst": "str", "nconst": "str", "characters": "str"}, na_values="\\N", chunksize=100000, low_memory=False, encoding="utf-8"):
         chunk_filtered = chunk[chunk["tconst"].isin(akas_set_1)]
         chunk_filtered = chunk_filtered.drop_duplicates(subset=["tconst", "nconst", "characters"], keep="first")
+        chunk_filtered = chunk_filtered.drop_duplicates(subset=["characters"], keep="first")
         chunk_filtered = chunk_filtered.dropna()
         principals_set_1.update(chunk_filtered["nconst"])
         chunk_filtered.to_csv(temp_filename, mode='a', index=False, header=not os.path.exists(temp_filename))
@@ -49,6 +51,7 @@ def load_filter_TSVs(file_tBasics, file_tAkas, file_tPrincipals, file_nBasics):
     for chunk in pandas.read_csv(file_nBasics, sep="\t", usecols=["nconst", "primaryName"], dtype={"nconst": "str", "primaryName": "str"}, na_values="\\N", chunksize=100000):
         chunk_filtered = chunk[chunk["nconst"].isin(principals_set_1)]
         chunk_filtered = chunk_filtered.drop_duplicates(subset=["nconst", "primaryName"], keep="first")
+        chunk_filtered = chunk_filtered.drop_duplicates(subset=["primaryName"], keep="first")
         chunk_filtered = chunk_filtered.dropna()
         actors_set_1.update(chunk_filtered["nconst"])
         chunk_filtered.to_csv(temp_filename, mode='a', index=False, header=not os.path.exists(temp_filename))
@@ -58,7 +61,7 @@ def load_filter_TSVs(file_tBasics, file_tAkas, file_tPrincipals, file_nBasics):
     print("Starting second phase of filtering...")
     # 0movies, 1akas, 2principals, 3actors
     print("Started loading files...")
-    movies = pandas.read_csv(files_to_rm[0], dtype={"tconst": "str", "titleType": "str", "primaryTitle": "str", "originalTitle": "str", "startYear": "str", "runtimeMinutes": "str", "genres": "str"})
+    movies = pandas.read_csv(files_to_rm[0], dtype={"tconst": "str", "titleType": "str", "primaryTitle": "str", "startYear": "str", "runtimeMinutes": "str", "genres": "str"})
     akas = pandas.read_csv(files_to_rm[1], dtype={"titleId": "str", "language": "str", "region": "str"})
     principals = pandas.read_csv(files_to_rm[2], dtype={"tconst": "str", "nconst": "str", "characters": "str"})
     actors = pandas.read_csv(files_to_rm[3], dtype={"nconst": "str", "primaryName": "str"})
