@@ -1,4 +1,4 @@
-import pandas, re
+import pandas, re, sys
 
 fileBase = '''@prefix : <http://www.rpcw.di.uminho.pt/2025/cinema/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -498,4 +498,9 @@ def writeOntologyInTTL(outFilename, movies_csv, actors_csv, characters_csv, ttl_
         
 
 if __name__ == "__main__":
-    writeOntologyInTTL("imdb_cinema_info.ttl", "movies.csv", "actors.csv", "principals.csv", fileBase, lastLine, ttl_url, 500)
+    nMovies = 500
+    if len(sys.argv) > 1 and len(sys.argv) < 3:
+        nMovies = int(sys.argv[1])
+        writeOntologyInTTL("imdb_cinema_info.ttl", "movies.csv", "actors.csv", "principals.csv", fileBase, lastLine, ttl_url, nMovies)
+    else:
+        print("Command: python3 tpc5_ontology.py [optional: nMovies]")
