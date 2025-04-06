@@ -1,0 +1,347 @@
+@prefix : <http://rpcw.di.uminho.pt/2025/historia#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://rpcw.di.uminho.pt/2025/historia> .
+
+<http://rpcw.di.uminho.pt/2025/historia> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#cria
+<http://www.rpcw.di.uminho.pt/2025/historia#cria> rdf:type owl:ObjectProperty ;
+                                                  owl:inverseOf <http://www.rpcw.di.uminho.pt/2025/historia#éCriado> ;
+                                                  rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Agricultor> ;
+                                                  rdfs:range <http://www.rpcw.di.uminho.pt/2025/historia#Animal> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#fazProduto
+<http://www.rpcw.di.uminho.pt/2025/historia#fazProduto> rdf:type owl:ObjectProperty ;
+                                                        owl:inverseOf <http://www.rpcw.di.uminho.pt/2025/historia#feitoPor> ;
+                                                        rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Agricultor> ;
+                                                        rdfs:range <http://www.rpcw.di.uminho.pt/2025/historia#Produto> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#fazendaDe
+<http://www.rpcw.di.uminho.pt/2025/historia#fazendaDe> rdf:type owl:ObjectProperty ;
+                                                       owl:inverseOf <http://www.rpcw.di.uminho.pt/2025/historia#temFazenda> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#feitoPor
+<http://www.rpcw.di.uminho.pt/2025/historia#feitoPor> rdf:type owl:ObjectProperty .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#pertenceA
+<http://www.rpcw.di.uminho.pt/2025/historia#pertenceA> rdf:type owl:ObjectProperty ;
+                                                       owl:inverseOf <http://www.rpcw.di.uminho.pt/2025/historia#temFerramenta> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#temFazenda
+<http://www.rpcw.di.uminho.pt/2025/historia#temFazenda> rdf:type owl:ObjectProperty ;
+                                                        rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> ;
+                                                        rdfs:range <http://www.rpcw.di.uminho.pt/2025/historia#Fazenda> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#temFerramenta
+<http://www.rpcw.di.uminho.pt/2025/historia#temFerramenta> rdf:type owl:ObjectProperty ;
+                                                           rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Agricultor> ;
+                                                           rdfs:range <http://www.rpcw.di.uminho.pt/2025/historia#Ferramenta> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#temResidente
+<http://www.rpcw.di.uminho.pt/2025/historia#temResidente> rdf:type owl:ObjectProperty ;
+                                                          owl:inverseOf <http://www.rpcw.di.uminho.pt/2025/historia#viveEm> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#temVendedor
+<http://www.rpcw.di.uminho.pt/2025/historia#temVendedor> rdf:type owl:ObjectProperty ;
+                                                         owl:inverseOf <http://www.rpcw.di.uminho.pt/2025/historia#vendeEm> ;
+                                                         rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Agricultor> ;
+                                                         rdfs:range <http://www.rpcw.di.uminho.pt/2025/historia#Feira> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#vendeEm
+<http://www.rpcw.di.uminho.pt/2025/historia#vendeEm> rdf:type owl:ObjectProperty .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#viveEm
+<http://www.rpcw.di.uminho.pt/2025/historia#viveEm> rdf:type owl:ObjectProperty ;
+                                                    rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> ;
+                                                    rdfs:range <http://www.rpcw.di.uminho.pt/2025/historia#Vila> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#éCriado
+<http://www.rpcw.di.uminho.pt/2025/historia#éCriado> rdf:type owl:ObjectProperty .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#éFilho
+<http://www.rpcw.di.uminho.pt/2025/historia#éFilho> rdf:type owl:ObjectProperty ;
+                                                    owl:inverseOf <http://www.rpcw.di.uminho.pt/2025/historia#éProgenitor> ;
+                                                    rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> ;
+                                                    rdfs:range <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#éProgenitor
+<http://www.rpcw.di.uminho.pt/2025/historia#éProgenitor> rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#contrataTemporários
+<http://www.rpcw.di.uminho.pt/2025/historia#contrataTemporários> rdf:type owl:DatatypeProperty ;
+                                                                 rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> ;
+                                                                 rdfs:range xsd:boolean .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#temTamanhoGrande
+<http://www.rpcw.di.uminho.pt/2025/historia#temTamanhoGrande> rdf:type owl:DatatypeProperty ;
+                                                              rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Localidade> ;
+                                                              rdfs:range xsd:boolean .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#trabalhaEm
+<http://www.rpcw.di.uminho.pt/2025/historia#trabalhaEm> rdf:type owl:DatatypeProperty ;
+                                                        rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Animal> ;
+                                                        rdfs:range xsd:string .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#usadoPara
+<http://www.rpcw.di.uminho.pt/2025/historia#usadoPara> rdf:type owl:DatatypeProperty ;
+                                                       rdfs:domain <http://www.rpcw.di.uminho.pt/2025/historia#Ferramenta> ;
+                                                       rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Agricultor
+<http://www.rpcw.di.uminho.pt/2025/historia#Agricultor> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Animal
+<http://www.rpcw.di.uminho.pt/2025/historia#Animal> rdf:type owl:Class .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Criação
+<http://www.rpcw.di.uminho.pt/2025/historia#Criação> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://www.rpcw.di.uminho.pt/2025/historia#Animal> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Estimação
+<http://www.rpcw.di.uminho.pt/2025/historia#Estimação> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://www.rpcw.di.uminho.pt/2025/historia#Animal> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Fazenda
+<http://www.rpcw.di.uminho.pt/2025/historia#Fazenda> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://www.rpcw.di.uminho.pt/2025/historia#Localidade> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Feira
+<http://www.rpcw.di.uminho.pt/2025/historia#Feira> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://www.rpcw.di.uminho.pt/2025/historia#Localidade> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Ferramenta
+<http://www.rpcw.di.uminho.pt/2025/historia#Ferramenta> rdf:type owl:Class .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Fruta
+<http://www.rpcw.di.uminho.pt/2025/historia#Fruta> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://www.rpcw.di.uminho.pt/2025/historia#Produto> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Localidade
+<http://www.rpcw.di.uminho.pt/2025/historia#Localidade> rdf:type owl:Class .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Pessoa
+<http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> rdf:type owl:Class .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Produto
+<http://www.rpcw.di.uminho.pt/2025/historia#Produto> rdf:type owl:Class .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Vegetal
+<http://www.rpcw.di.uminho.pt/2025/historia#Vegetal> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://www.rpcw.di.uminho.pt/2025/historia#Produto> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Vila
+<http://www.rpcw.di.uminho.pt/2025/historia#Vila> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://www.rpcw.di.uminho.pt/2025/historia#Localidade> .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Alfaces
+<http://www.rpcw.di.uminho.pt/2025/historia#Alfaces> rdf:type owl:NamedIndividual ,
+                                                              <http://www.rpcw.di.uminho.pt/2025/historia#Produto> ,
+                                                              <http://www.rpcw.di.uminho.pt/2025/historia#Vegetal> ;
+                                                     <http://www.rpcw.di.uminho.pt/2025/historia#feitoPor> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._Carlos> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Ana
+<http://www.rpcw.di.uminho.pt/2025/historia#Ana> rdf:type owl:NamedIndividual ,
+                                                          <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> ;
+                                                 <http://www.rpcw.di.uminho.pt/2025/historia#éFilho> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> ,
+                                                                                                     <http://www.rpcw.di.uminho.pt/2025/historia#Sra._Maria> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Bananas
+<http://www.rpcw.di.uminho.pt/2025/historia#Bananas> rdf:type owl:NamedIndividual ,
+                                                              <http://www.rpcw.di.uminho.pt/2025/historia#Fruta> ,
+                                                              <http://www.rpcw.di.uminho.pt/2025/historia#Produto> ;
+                                                     <http://www.rpcw.di.uminho.pt/2025/historia#feitoPor> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Cenouras
+<http://www.rpcw.di.uminho.pt/2025/historia#Cenouras> rdf:type owl:NamedIndividual ,
+                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Produto> ,
+                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Vegetal> ;
+                                                      <http://www.rpcw.di.uminho.pt/2025/historia#feitoPor> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._Carlos> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Fazenda_Carlos
+<http://www.rpcw.di.uminho.pt/2025/historia#Fazenda_Carlos> rdf:type owl:NamedIndividual ,
+                                                                     <http://www.rpcw.di.uminho.pt/2025/historia#Fazenda> ,
+                                                                     <http://www.rpcw.di.uminho.pt/2025/historia#Localidade> ;
+                                                            <http://www.rpcw.di.uminho.pt/2025/historia#fazendaDe> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._Carlos> ;
+                                                            <http://www.rpcw.di.uminho.pt/2025/historia#temTamanhoGrande> "true"^^xsd:boolean .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Fazenda_João
+<http://www.rpcw.di.uminho.pt/2025/historia#Fazenda_João> rdf:type owl:NamedIndividual ,
+                                                                   <http://www.rpcw.di.uminho.pt/2025/historia#Fazenda> ,
+                                                                   <http://www.rpcw.di.uminho.pt/2025/historia#Localidade> ;
+                                                          <http://www.rpcw.di.uminho.pt/2025/historia#fazendaDe> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> ;
+                                                          <http://www.rpcw.di.uminho.pt/2025/historia#temTamanhoGrande> "false"^^xsd:boolean .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Galinhas
+<http://www.rpcw.di.uminho.pt/2025/historia#Galinhas> rdf:type owl:NamedIndividual ,
+                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Animal> ,
+                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Criação> ;
+                                                      <http://www.rpcw.di.uminho.pt/2025/historia#éCriado> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Geleia
+<http://www.rpcw.di.uminho.pt/2025/historia#Geleia> rdf:type owl:NamedIndividual ,
+                                                             <http://www.rpcw.di.uminho.pt/2025/historia#Produto> ;
+                                                    <http://www.rpcw.di.uminho.pt/2025/historia#feitoPor> <http://www.rpcw.di.uminho.pt/2025/historia#Sra._Maria> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Laranjas
+<http://www.rpcw.di.uminho.pt/2025/historia#Laranjas> rdf:type owl:NamedIndividual ,
+                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Fruta> ,
+                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Produto> ;
+                                                      <http://www.rpcw.di.uminho.pt/2025/historia#feitoPor> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Maçãs
+<http://www.rpcw.di.uminho.pt/2025/historia#Maçãs> rdf:type owl:NamedIndividual ,
+                                                            <http://www.rpcw.di.uminho.pt/2025/historia#Fruta> ,
+                                                            <http://www.rpcw.di.uminho.pt/2025/historia#Produto> ;
+                                                   <http://www.rpcw.di.uminho.pt/2025/historia#feitoPor> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Pedro
+<http://www.rpcw.di.uminho.pt/2025/historia#Pedro> rdf:type owl:NamedIndividual ,
+                                                            <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> ;
+                                                   <http://www.rpcw.di.uminho.pt/2025/historia#éFilho> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> ,
+                                                                                                       <http://www.rpcw.di.uminho.pt/2025/historia#Sra._Maria> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Porcos
+<http://www.rpcw.di.uminho.pt/2025/historia#Porcos> rdf:type owl:NamedIndividual ,
+                                                             <http://www.rpcw.di.uminho.pt/2025/historia#Animal> ,
+                                                             <http://www.rpcw.di.uminho.pt/2025/historia#Criação> ;
+                                                    <http://www.rpcw.di.uminho.pt/2025/historia#éCriado> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Rex
+<http://www.rpcw.di.uminho.pt/2025/historia#Rex> rdf:type owl:NamedIndividual ,
+                                                          <http://www.rpcw.di.uminho.pt/2025/historia#Animal> ,
+                                                          <http://www.rpcw.di.uminho.pt/2025/historia#Estimação> ;
+                                                 <http://www.rpcw.di.uminho.pt/2025/historia#trabalhaEm> "Guarda" .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Sr._Carlos
+<http://www.rpcw.di.uminho.pt/2025/historia#Sr._Carlos> rdf:type owl:NamedIndividual ,
+                                                                 <http://www.rpcw.di.uminho.pt/2025/historia#Agricultor> ,
+                                                                 <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> ;
+                                                        <http://www.rpcw.di.uminho.pt/2025/historia#fazProduto> <http://www.rpcw.di.uminho.pt/2025/historia#Alfaces> ,
+                                                                                                                <http://www.rpcw.di.uminho.pt/2025/historia#Cenouras> ,
+                                                                                                                <http://www.rpcw.di.uminho.pt/2025/historia#Tomates> ;
+                                                        <http://www.rpcw.di.uminho.pt/2025/historia#temFazenda> <http://www.rpcw.di.uminho.pt/2025/historia#Fazenda_Carlos> ;
+                                                        <http://www.rpcw.di.uminho.pt/2025/historia#contrataTemporários> "true"^^xsd:boolean .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Sr._João
+<http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> rdf:type owl:NamedIndividual ,
+                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Agricultor> ,
+                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> ;
+                                                      <http://www.rpcw.di.uminho.pt/2025/historia#cria> <http://www.rpcw.di.uminho.pt/2025/historia#Galinhas> ,
+                                                                                                        <http://www.rpcw.di.uminho.pt/2025/historia#Porcos> ,
+                                                                                                        <http://www.rpcw.di.uminho.pt/2025/historia#Vacas> ;
+                                                      <http://www.rpcw.di.uminho.pt/2025/historia#fazProduto> <http://www.rpcw.di.uminho.pt/2025/historia#Bananas> ,
+                                                                                                              <http://www.rpcw.di.uminho.pt/2025/historia#Laranjas> ,
+                                                                                                              <http://www.rpcw.di.uminho.pt/2025/historia#Maçãs> ;
+                                                      <http://www.rpcw.di.uminho.pt/2025/historia#temFazenda> <http://www.rpcw.di.uminho.pt/2025/historia#Fazenda_João> ;
+                                                      <http://www.rpcw.di.uminho.pt/2025/historia#viveEm> <http://www.rpcw.di.uminho.pt/2025/historia#São_José> ;
+                                                      <http://www.rpcw.di.uminho.pt/2025/historia#éProgenitor> <http://www.rpcw.di.uminho.pt/2025/historia#Ana> ,
+                                                                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Pedro> ;
+                                                      <http://www.rpcw.di.uminho.pt/2025/historia#contrataTemporários> "false"^^xsd:boolean .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Sra._Maria
+<http://www.rpcw.di.uminho.pt/2025/historia#Sra._Maria> rdf:type owl:NamedIndividual ,
+                                                                 <http://www.rpcw.di.uminho.pt/2025/historia#Agricultor> ,
+                                                                 <http://www.rpcw.di.uminho.pt/2025/historia#Pessoa> ;
+                                                        <http://www.rpcw.di.uminho.pt/2025/historia#fazProduto> <http://www.rpcw.di.uminho.pt/2025/historia#Geleia> ;
+                                                        <http://www.rpcw.di.uminho.pt/2025/historia#viveEm> <http://www.rpcw.di.uminho.pt/2025/historia#São_José> ;
+                                                        <http://www.rpcw.di.uminho.pt/2025/historia#éProgenitor> <http://www.rpcw.di.uminho.pt/2025/historia#Ana> ,
+                                                                                                                 <http://www.rpcw.di.uminho.pt/2025/historia#Pedro> ;
+                                                        <http://www.rpcw.di.uminho.pt/2025/historia#contrataTemporários> "false"^^xsd:boolean .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#São_José
+<http://www.rpcw.di.uminho.pt/2025/historia#São_José> rdf:type owl:NamedIndividual ,
+                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Localidade> ,
+                                                               <http://www.rpcw.di.uminho.pt/2025/historia#Vila> ;
+                                                      <http://www.rpcw.di.uminho.pt/2025/historia#temResidente> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> ,
+                                                                                                                <http://www.rpcw.di.uminho.pt/2025/historia#Sra._Maria> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Tomates
+<http://www.rpcw.di.uminho.pt/2025/historia#Tomates> rdf:type owl:NamedIndividual ,
+                                                              <http://www.rpcw.di.uminho.pt/2025/historia#Produto> ,
+                                                              <http://www.rpcw.di.uminho.pt/2025/historia#Vegetal> ;
+                                                     <http://www.rpcw.di.uminho.pt/2025/historia#feitoPor> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._Carlos> .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Trator_joão
+<http://www.rpcw.di.uminho.pt/2025/historia#Trator_joão> rdf:type owl:NamedIndividual ,
+                                                                  <http://www.rpcw.di.uminho.pt/2025/historia#Ferramenta> ;
+                                                         <http://www.rpcw.di.uminho.pt/2025/historia#usadoPara> "Arar Campos e plantar sementes" .
+
+
+###  http://www.rpcw.di.uminho.pt/2025/historia#Vacas
+<http://www.rpcw.di.uminho.pt/2025/historia#Vacas> rdf:type owl:NamedIndividual ,
+                                                            <http://www.rpcw.di.uminho.pt/2025/historia#Animal> ,
+                                                            <http://www.rpcw.di.uminho.pt/2025/historia#Criação> ;
+                                                   <http://www.rpcw.di.uminho.pt/2025/historia#éCriado> <http://www.rpcw.di.uminho.pt/2025/historia#Sr._João> .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
