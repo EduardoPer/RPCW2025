@@ -150,9 +150,9 @@ for k,v in ds_dict.items():
             ont_txt += ';\n\t:hasTreatment '
             for i in range(0, len(treats)):
                 if i == 0:
-                    ont_txt += f'''"{treats[i]}" '''
+                    ont_txt += f''':{treats[i]} '''
                 else:
-                    ont_txt += f''', "{treats[i]}" '''
+                    ont_txt += f''', :{treats[i]} '''
                     
     ont_txt += '.\n\n'
 
