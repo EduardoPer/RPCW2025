@@ -18,13 +18,14 @@ ds_txt = ds_txt.split("\n")[1:]
 for l in ds_txt:
     l = l.split(",")
     l[0] = l[0].strip().replace(" ", "_").replace("(", "_").replace(")", "_").strip("_").replace("__", "_").lower()
+    l[0] = l[0].title()
     if l[0] not in ds_dict.keys() and l[0] != "":
         ds_dict[l[0]] = []
     for s in l[1:]:
         s = s.strip().replace(" ", "_").replace("(", "_").replace(")", "_").strip("_").replace("__", "_").lower()
+        s = s.title()
         if s not in ds_dict[l[0]] and s != "":
             ds_dict[l[0]].append(s)
-            s = f":{s} a :Symptom ."
             if s not in symptoms_to_add:
                 symptoms_to_add.append(s)
 
@@ -36,6 +37,7 @@ dd_txt = dd_txt.split("\n")[1:]
 for l in dd_txt:
     l = l.split(",", 1)
     l[0] = l[0].strip().replace(" ", "_").replace("(", "_").replace(")", "_").strip("_").replace("__", "_").lower()
+    l[0] = l[0].title()
     if len(l) > 1:
         if l[0] not in dd_dict.keys():
             dd_dict[l[0]] = []
@@ -49,13 +51,14 @@ dt_txt = dt_txt.split("\n")[1:]
 for l in dt_txt:
     l = l.split(",", 4)
     l[0] = l[0].strip().replace(" ", "_").replace("(", "_").replace(")", "_").strip("_").replace("__", "_").lower()
+    l[0] = l[0].title()
     if l[0] not in dt_dict.keys() and l[0] != "":
         dt_dict[l[0]] = []
     for s in l[1:]:
         s = s.strip().replace(" ", "_").replace("(", "_").replace(")", "_").strip("_").replace("__", "_").lower()
+        s = s.title()
         if s not in dt_dict[l[0]] and s != "":
             dt_dict[l[0]].append(s)
-            s = f":{s} a :Treatment ."
             if s not in treatments_to_add:
                 treatments_to_add.append(s)
 
@@ -73,7 +76,8 @@ for d in doentes_json:
         sintomas_added = []
         for sint in d["sintomas"]:
             sint = sint.strip().replace(" ", "_").replace("(", "_").replace(")", "_").strip("_").replace("__", "_").lower()
-            if sint not in sintomas_added:
+            sint = sint.title()
+            if (sint not in sintomas_added) and (sint in symptoms_to_add):
                 sintomas_added.append(sint)
                 doentes_ont += f';\n\t:exhibitsSymptom :{sint} '
     doentes_ont += '.\n\n'
@@ -121,6 +125,10 @@ ont_txt = '''@prefix : <http://www.example.org/disease-ontology#> .
                      rdfs:domain :Disease ;
                      rdfs:range xsd:string .
 
+:name a owl:DatatypeProperty ;
+                     rdfs:domain :Patient ;
+                     rdfs:range xsd:string .
+
 #Disease instances
 '''
 
@@ -158,10 +166,10 @@ for k,v in ds_dict.items():
 
 ont_txt += '#Symptoms instances\n'
 for sym in symptoms_to_add:
-    ont_txt += sym + "\n"
+    ont_txt += f":{sym} a :Symptom .\n"
 ont_txt += '\n#Treatments instances\n'
 for treat in treatments_to_add:
-    ont_txt += treat + "\n"
+    ont_txt += f":{treat} a :Treatment .\n"
 ont_txt += '\n#Patient instances\n' + doentes_ont
 
 with open("med_doentes.ttl", "w", encoding='utf-8') as f:
